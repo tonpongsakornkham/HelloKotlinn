@@ -1,9 +1,9 @@
-package com.example.meeting
+package com.example.meeting.Model
 
 import com.google.gson.annotations.SerializedName
 
 
-data class Data(
+data class DataModel(
 
     @SerializedName("Address") val Address: String,
     @SerializedName("Body") val Body: String,

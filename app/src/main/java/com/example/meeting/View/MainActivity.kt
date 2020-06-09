@@ -1,4 +1,4 @@
-package com.example.meeting
+package com.example.meeting.View
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.meeting.Model.DataModel
+import com.example.meeting.R
+import com.example.meeting.RecycleView.DataAdapter
+import com.example.meeting.Retrofit.CallApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,8 +21,9 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     var recyclerView: RecyclerView? = null
-    var arrayList: ArrayList<Data>? = null
+    var arrayList: ArrayList<DataModel>? = null
     var dataAdapter: DataAdapter? = null
+    var listCall: Call<List<DataModel>>? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +41,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getClick() {
-        dataAdapter!!.setItemClickListener(object : DataAdapter.ItemClickListener {
+        dataAdapter!!.setItemClickListener(object :
+            DataAdapter.ItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d("test", "onItemClick: index = $position")
                 val location: String? = arrayList!![position].Location
@@ -66,15 +72,18 @@ class MainActivity : AppCompatActivity() {
             .build()
         val callApi = retrofit.create(CallApi::class.java)
         val call = callApi.getDatas()
-        call.enqueue(object : Callback<List<Data>> {
-            override fun onResponse(call: Call<List<Data>>, response: Response<List<Data>>) {
-                arrayList = response.body() as ArrayList<Data>?
-                dataAdapter = DataAdapter(this@MainActivity, arrayList!!)
+        call.enqueue(object : Callback<List<DataModel>> {
+            override fun onResponse(call: Call<List<DataModel>>, response: Response<List<DataModel>>) {
+                arrayList = response.body() as ArrayList<DataModel>?
+                dataAdapter = DataAdapter(
+                    this@MainActivity,
+                    arrayList!!
+                )
                 getClick()
                 recyclerView!!.adapter = dataAdapter
             }
 
-            override fun onFailure(call: Call<List<Data>>, t: Throwable) {
+            override fun onFailure(call: Call<List<DataModel>>, t: Throwable) {
                 Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
             }
         })

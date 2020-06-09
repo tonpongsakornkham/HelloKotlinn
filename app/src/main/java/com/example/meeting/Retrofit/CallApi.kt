@@ -1,5 +1,6 @@
-package com.example.meeting
+package com.example.meeting.Retrofit
 
+import com.example.meeting.Model.DataModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -17,5 +18,5 @@ interface CallApi {
 
     @Headers(secret_key + key_val)
     @GET("b/5ece36edd7f1581464c65dea")
-    fun getDatas(): Call<List<Data>>
+    fun getDatas(): Call<List<DataModel>>
 }

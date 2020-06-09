@@ -1,4 +1,4 @@
-package com.example.meeting
+package com.example.meeting.RecycleView
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.meeting.Model.DataModel
+import com.example.meeting.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DataAdapter(private var context: Context, var arrayList: ArrayList<Data>) :
+class DataAdapter(private var context: Context, var arrayList: ArrayList<DataModel>) :
     RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
 
     //Click

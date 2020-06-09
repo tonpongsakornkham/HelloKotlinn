@@ -1,10 +1,11 @@
-package com.example.meeting
+package com.example.meeting.View
 
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.meeting.R
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,7 +25,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        Objects.requireNonNull(supportActionBar).setDisplayHomeAsUpEnabled(true)
+        Objects.requireNonNull(supportActionBar)?.setDisplayHomeAsUpEnabled(true)
 
         val bundle = intent.extras
         val room = bundle!!.getString("Location")
